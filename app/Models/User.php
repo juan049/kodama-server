@@ -1,5 +1,5 @@
 <?php
-//coment 2
+// 3
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;

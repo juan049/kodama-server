@@ -20,14 +20,10 @@ use App\Http\Controllers\UserController;
 //     return $request->user();
 // });
 
-Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-
-
-
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('users', [UserController::class, 'index']);
-    Route::get('user-info', [AuthController::class, 'user_info']);
+    Route::get('renew-token', [AuthController::class, 'renew_token']);
 });

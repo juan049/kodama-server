@@ -13,39 +13,6 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     
-    public function register( Request $request)
-    {
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max::255|unique:users',
-            'password' => 'required:string:min8'
-
-        ]);
-        
-        if ($validator->fails()){
-            return response()->json($validator->errors());
-        }
-
-        $user = User::create([
-            'uuid' => Str::uuid(),
-            'name' => $request->name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]); 
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()
-            ->json([
-                'data' => $user,
-                'access_token' => $token,
-                'token_type' => 'Bearer'
-            ]);
-    }
-
     public function login( Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))){
@@ -68,6 +35,19 @@ class AuthController extends Controller
             ]);
     }
 
+    public function renew_token(){
+        $user = auth()->user();
+        auth()->user()->tokens()->delete();
+        $token = $user->createToken('auth_token')->plainTextToken;
+        return response()
+            ->json([
+                'ok' => true,
+                'data' => $user,
+                'access_token' => $token,
+                'token_type' => 'Bearer'
+            ]);
+    }
+
     public function logout()
     {
         auth()->user()->tokens()->delete();
@@ -76,13 +56,4 @@ class AuthController extends Controller
             'message' => 'Has cerrado sesión y tus tokens han sido borrados'
         ];
     }
-
-    public function user_info()
-    {
-        $user = auth()->user();
-        return response()->json($user);
-
-    }
-
-
 }
