@@ -40,9 +40,40 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function task_list(Request $request)
+
+    public function save_notes(Request $request)
     {
-        //
+        $user = auth()->user();
+
+        if(!$user) {
+            return response()->json([
+                'ok' => false,
+                "message" => 'El usuario no ha iniciado sesión'
+            ]);
+        }
+
+        $validated_notes = $request->validate([
+            'notes' => 'string'
+        ]);
+
+        // Determino al usuario   
+        $user = auth()->user();
+
+        $user->notes = $validated_notes['notes'];
+        $result = $user->save();
+
+        if(!$result) {
+            return response()->json([
+                'ok' => false,
+                "message" => 'No se pudieron guardar las notas'
+            ]);
+        }else{
+            return response()->json([
+                'ok' => true,
+                "message" => 'Notas guardadas correctamente'
+            ]);
+        }
+
         
     }
 

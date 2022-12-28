@@ -31,4 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
     //Usuario
     Route::get('user', [UserController::class, 'index']);
     Route::get('user/{uuid}', [UserController::class, 'show']);
+    Route::patch('user/notes', [UserController::class, 'save_notes']);
+
 });
