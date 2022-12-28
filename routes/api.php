@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -24,6 +25,10 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
-    Route::get('users', [UserController::class, 'index']);
-    Route::get('renew-token', [AuthController::class, 'renew_token']);
+    
+    Route::get('renew', [AuthController::class, 'renew']);
+
+    //Usuario
+    Route::get('user', [UserController::class, 'index']);
+    Route::get('user/{uuid}', [UserController::class, 'show']);
 });

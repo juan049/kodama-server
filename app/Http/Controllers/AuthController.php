@@ -35,7 +35,7 @@ class AuthController extends Controller
             ]);
     }
 
-    public function renew_token(){
+    public function renew(){
         $user = auth()->user();
         auth()->user()->tokens()->delete();
         $token = $user->createToken('auth_token')->plainTextToken;

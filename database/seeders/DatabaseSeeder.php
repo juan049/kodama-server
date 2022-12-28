@@ -15,9 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        
+        //Factory genericos
         User::factory(50)->create();
-        // $this->call([
-        //     // UserSeeder::class
-        // ]);
+        //Seeders especificos
+        $this->call([
+            UserSeeder::class
+        ]);
     }
 }
