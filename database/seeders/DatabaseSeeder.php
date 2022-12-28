@@ -21,9 +21,10 @@ class DatabaseSeeder extends Seeder
 
         //Seeders especificos
         $this->call([
+            FileSeeder::class,
+            StateSeeder::class,
+            MunicipalitySeeder::class,
             UserSeeder::class,
-            CoordinationSeeder::class,
-            PrivilegeSeeder::class
         ]);
     }
 }

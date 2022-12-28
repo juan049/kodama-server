@@ -12,25 +12,7 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
-        //Privilegios
-        Schema::create('privileges', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->string('description')->nullable();
-            $table->string('permissions')->nullable();
-            $table->timestamps();
-        });
-        
-        // Coordinaciones
-        Schema::create('coordinations', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->string('description')->nullable();
-            $table->timestamps();
-        });
-        
+    {        
         //Usuarios
         Schema::create('users', function (Blueprint $table) {
             $table->id();
@@ -55,6 +37,5 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('coordinations');
     }
 };
