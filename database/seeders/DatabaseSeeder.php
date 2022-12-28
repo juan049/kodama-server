@@ -18,9 +18,12 @@ class DatabaseSeeder extends Seeder
         
         //Factory genericos
         User::factory(50)->create();
+
         //Seeders especificos
         $this->call([
-            UserSeeder::class
+            UserSeeder::class,
+            CoordinationSeeder::class,
+            PrivilegeSeeder::class
         ]);
     }
 }
