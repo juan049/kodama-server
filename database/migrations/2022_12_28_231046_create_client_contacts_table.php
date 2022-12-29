@@ -12,20 +12,21 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {        
-        //Usuarios
-        Schema::create('users', function (Blueprint $table) {
+    {
+        Schema::create('client_contacts', function (Blueprint $table) {
             $table->id();
-            $table->uuid()->unique();
+            $table->uuid();
+            $table->foreignId('client_id')->constrained();
             $table->string('name');
             $table->string('last_name');
-            $table->string('email')->unique();
-            $table->string('phone')->nullable()->unique();
-            $table->string('notes')->nullable();
-            $table->string('password');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->boolean('is_legal_representative');
+            //TODO el constraint
+            $table->unsignedBigInteger('legal_power')->nullable();
+            $table->unsignedBigInteger('official_id')->nullable();
             $table->timestamps();
         });
-
     }
 
     /**
@@ -35,7 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files'); //TODO reolver esto, hacer una migración que borre en orden
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('client_contacts');
     }
 };

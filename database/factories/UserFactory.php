@@ -22,7 +22,6 @@ class UserFactory extends Factory
             'uuid' => Str::uuid(),
             'name' => fake()->name(),
             'last_name' => fake()->lastName(),
-            'profile_image' => fake()->imageUrl(),
             "phone" => fake()->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
             'password' => Hash::make('0000000000'),

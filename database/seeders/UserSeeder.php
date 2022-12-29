@@ -22,7 +22,6 @@ class UserSeeder extends Seeder
             'uuid' => Str::uuid(),
             'name' => 'Juan José',
             'last_name' => 'Rodriguez',
-            "profile_image" => fake()->imageUrl(640, 480, null,true,null,null),
             "phone" => '4610000000',
             'email' => 'email@email.com',
             'notes' => 'test',

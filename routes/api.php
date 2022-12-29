@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -19,7 +17,29 @@ use App\Http\Controllers\UserController;
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
-// });
+// })
+
+
+Route::get('path', function( Faker $faker ) {
+    
+    $folder_path = storage_path().'/app/files/profile_image';
+    // List of name of files inside
+    // specified folder
+    $files = glob($folder_path.'/*'); 
+    
+    // Deleting all the files in the list
+    foreach($files as $file) {
+    
+        if(is_file($file)) 
+        
+            // Delete the given file
+            unlink($file); 
+    }
+
+
+    
+
+});
 
 Route::post('login', [AuthController::class, 'login']);
 
