@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('authority_dependencies', function (Blueprint $table) {
             $table->id();
             $table->uuid();
+            $table->foreignId('authority_id')->constrained();
             $table->string('name')->unique();
-            $table->string('description')->nullable();
+            $table->string('description');
             $table->foreignId('adress_id')->constrained();
             $table->foreignId('contact_id')->constrained();
+            $table->string('director_name')->nullable();
+            $table->string('director_last_name')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('authority_dependencies');
     }
 };

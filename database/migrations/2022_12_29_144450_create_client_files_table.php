@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('client_files', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
-            $table->string('name')->unique();
-            $table->string('description')->nullable();
-            $table->foreignId('adress_id')->constrained();
-            $table->foreignId('contact_id')->constrained();
+            $table->foreignId('client_id')->constrained();
+            $table->unsignedBigInteger('constitutive_act')->foreignId('file_id')->nullable()->constrained();
+            $table->unsignedBigInteger('solil_usage')->foreignId('file_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('client_files');
     }
 };

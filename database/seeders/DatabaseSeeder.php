@@ -3,12 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use App\Models\User;
+use App\Models\State;
 use App\Models\Client;
-use App\Models\UserConfig;
-use App\Models\UserImageFile;
+use App\Models\Municipality;
 use Illuminate\Database\Seeder;
-use App\Models\UserCoordinationPrivilege;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,24 +18,40 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        
-        //Factory genericos
-        User::factory(50)->create();
-
+    { 
         //Seeders especificos
         $this->call([
             FileSeeder::class,
-            StateSeeder::class,
-            MunicipalitySeeder::class,
+        ]);
+
+        if(count(State::all()) === 0 || count(Municipality::all()) === 0){
+            $this->call([
+                StateSeeder::class,
+                MunicipalitySeeder::class,
+            ]);    
+        }
+        
+
+        //Factory genericos
+        User::factory(50)->create();
+        Client::factory(50)->create();
+
+        
+        //Seeders especificos
+        $this->call([
             UserSeeder::class,
             UserImageFileSeeder::class,
             UserConfigSeeder::class,
             CoordinationSeeder::class,
             PrivilegesSeeder::class,
             UserCoordinationPrivilegeSeeder::class,
+            ClientContactSeeder::class,
+            ClientFileSeeder::class,
+            AuthoritySeeder::class,
+            AuthorityDependencySeeder::class,
+            ServiceSeeder::class,
+            StateSeeder::class,
+            CurrentProcessSeeder::class,
         ]);
-
-        Client::factory(50)->create();
     }
 }

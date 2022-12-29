@@ -19,12 +19,11 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained();
             $table->string('name');
             $table->string('last_name');
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->foreignId('contact_id')->constrained();
             $table->boolean('is_legal_representative');
-            //TODO el constraint
-            $table->unsignedBigInteger('legal_power')->nullable();
-            $table->unsignedBigInteger('official_id')->nullable();
+            $table->unsignedBigInteger('creator')->foreignId('user_id')->nullable()->constrained();
+            $table->unsignedBigInteger('legal_power')->foreignId('file_id')->nullable()->constrained();
+            $table->unsignedBigInteger('official_id')->foreignId('file_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
