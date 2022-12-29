@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('municipalities'))
-        {
-            Schema::create('municipalities', function (Blueprint $table) {
-                $table->id();
-                $table->foreignId('state_id')->constrained();
-                $table->string('name');
-                $table->timestamps();
-            });
-        }
+        Schema::create('client_logo_files', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('client_id')->constrained();
+            $table->foreignId('file_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('municipalities');
+        Schema::dropIfExists('client_logo_files');
     }
 };

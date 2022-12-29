@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Municipality;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,7 +24,7 @@ class ClientFactory extends Factory
             'street' => fake()->streetName(),
             'suburb' => fake()->city(),
             'zip_code' => fake()->postcode(),
-            //'municipality_id' //TODO Cambiar municipio
+            'municipality_id' => rand(1, count(Municipality::all())),
             'lat' => fake()->latitude(),
             'lng' => fake()->longitude(),
             'email' => fake()->email(),

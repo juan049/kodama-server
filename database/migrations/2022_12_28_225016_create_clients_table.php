@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('street')->nullable();
             $table->string('suburb')->nullable();
             $table->string('zip_code')->nullable();
-            // $table->foreignId('municipality_id')->constrained(); //TODO no nullable
+            $table->foreignId('municipality_id')->constrained();
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
             $table->string('email')->nullable();
