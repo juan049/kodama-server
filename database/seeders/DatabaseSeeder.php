@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\State;
 use App\Models\Client;
+use App\Models\ClientServiceFile;
 use App\Models\Municipality;
 use Illuminate\Database\Seeder;
 
@@ -52,6 +53,13 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             StateSeeder::class,
             CurrentProcessSeeder::class,
+            ClientServiceSeeder::class,
+            ClientServiceFileSeeder::class,
+            PermissionSeeder::class,
+            ClientServiceUserPermissionSeeder::class,
+            ToolSeeder::class,
+            ClientServiceToolSeeder::class
+            
         ]);
     }
 }

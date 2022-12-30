@@ -20,27 +20,6 @@ use App\Http\Controllers\UserController;
 // })
 
 
-Route::get('path', function( Faker $faker ) {
-    
-    $folder_path = storage_path().'/app/files/profile_image';
-    // List of name of files inside
-    // specified folder
-    $files = glob($folder_path.'/*'); 
-    
-    // Deleting all the files in the list
-    foreach($files as $file) {
-    
-        if(is_file($file)) 
-        
-            // Delete the given file
-            unlink($file); 
-    }
-
-
-    
-
-});
-
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -50,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //Usuario
     Route::get('user', [UserController::class, 'index']);
+    Route::post('user', [UserController::class, 'store']);
+
     Route::get('user/{uuid}', [UserController::class, 'show']);
     Route::patch('user/notes', [UserController::class, 'save_notes']);
 
