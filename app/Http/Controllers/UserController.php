@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,10 +17,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json([
-            'ok' => true,
-            'users' => $users
-        ]);
+
+        $response = generical_response(
+            ok: true, 
+            data: $users, 
+            message: 'Usuarios obtenidos satisactoriamente'
+    );
+        return response()->json($response);
         
     }
 
@@ -30,8 +35,32 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        
+        // Valido el request
+        $validated = $request->validate([
+           'name' => 'required|string',
+           'last_name' => 'required|string',
+           'email' => 'required|email|unique:users',
+           'phone' => 'string|numeric',
+           'password'  => 'required|string|min:10|regex:^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)^'
+        ]);
+
+        $keys = array_keys($validated);        
+        //Creo el usuario
+        $user = new User;
+
+        foreach($keys as $key){
+            if($key === 'password'){
+                $user[$key] = Hash::make($validated[$key]);
+            }else{
+                $user[$key] = $validated[$key];
+            }
+        }
+
+        $user->uuid = Str::uuid();
+
+        $result = $user->save();
+                          
+        return $user;
     }
 
     /**
