@@ -21,6 +21,7 @@ use App\Http\Controllers\UserController;
 
 
 Route::post('login', [AuthController::class, 'login']);
+Route::post('recovery-password', [AuthController::class, 'recovery_password']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);

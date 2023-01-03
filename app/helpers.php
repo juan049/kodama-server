@@ -1,10 +1,10 @@
 <?php
 
-function generical_response($ok = false, $data = null, $message = null, $errors = null){
+function generical_response($ok = false, $data = null, $message = null, $error_message = null){
     return [
-        'ok' => true,
+        'ok' => $ok,
         'data' => $data ? $data : [],
         'message' => $message ? $message : 'No message',
-        "errors" => $errors
+        "error" => $error_message
     ];
 }

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('phone')->nullable()->unique();
             $table->string('notes')->nullable();
             $table->string('password');
+            $table->string('recover_token')->nullable()->unique();
+            $table->date('recover_token_expiry_date')->nullable();
             $table->timestamps();
         });
 

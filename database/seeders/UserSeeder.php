@@ -20,12 +20,12 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'uuid' => Str::uuid(),
-            'name' => 'Juan José',
+            'name' => 'Juan',
             'last_name' => 'Rodriguez',
             "phone" => '4610000000',
             'email' => 'email@email.com',
             'notes' => 'test',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('1234567890'),
             "created_at" => Carbon::now(),
             "updated_at" => null
         ]);
